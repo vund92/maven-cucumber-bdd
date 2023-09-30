@@ -37,5 +37,10 @@ public class UserHomePageObject extends BasePage {
 		waitForElementVisible(UserRegisterPageUI.LOGIN_LINK);
 		return isElementUndisplayed(UserRegisterPageUI.LOGIN_LINK);
 	}
+	
+	public boolean isWelcomeMessageDisplayed() {
+		waitForElementVisible(UserHomePageUI.WELCOME_MESSAGE);
+		return isElementDisplayed(UserHomePageUI.WELCOME_MESSAGE);
+	}
 
 }

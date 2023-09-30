@@ -16,7 +16,7 @@ import commons.GlobalConstants;
 import cucumber.api.java.Before;
 import io.github.bonigarcia.wdm.WebDriverManager;
 
-public class Hooks {
+public class Hooks { //Hook nay la Before/After cua Cucumber
 	// Run for many thread
 	private static WebDriver driver;
 	private static final Logger log = Logger.getLogger(Hooks.class.getName());

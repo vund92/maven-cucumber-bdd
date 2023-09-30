@@ -13,7 +13,10 @@
 		<maven.compiler.target>1.8</maven.compiler.target>
 		<maven.compiler.source>1.8</maven.compiler.source>
 		<faker.version>1.0.1</faker.version>
-		<webdrivermanager.version>5.0.2</webdrivermanager.version>
+		<webdrivermanager.version>5.5.3</webdrivermanager.version>
+		<!--<jackson.version>2.9.4</jackson.version>-->
+		<report.version>5.7.6</report.version>
+
 	</properties>
 
 	<dependencies>
@@ -43,7 +46,7 @@
 			<groupId>info.cukes</groupId>
 			<artifactId>cucumber-testng</artifactId>
 			<version>${cucumber.version}</version>
-		</dependency>
+		</dependency> <!--Comment la vi minh dung cucumber-junit, ko de hai tui no conflict voi nhau-->
 
 		<dependency>
 			<groupId>org.seleniumhq.selenium</groupId>
@@ -51,12 +54,12 @@
 			<version>${selenium.version}</version>
 		</dependency>
 
-		<dependency>
+		<!--<dependency>
 			<groupId>io.github.bonigarcia</groupId>
 			<artifactId>webdrivermanager</artifactId>
-			<version>4.1.0</version>
+			<version>${webdrivermanager.version}</version> <4.1.0>
 			<scope>test</scope>
-		</dependency>
+		</dependency> -->
 
 		<dependency>
 			<groupId>log4j</groupId>
@@ -67,7 +70,7 @@
 		<dependency>
 			<groupId>net.masterthought</groupId>
 			<artifactId>cucumber-reporting</artifactId>
-			<version>5.7.6</version>
+			<version>${report.version}</version>
 		</dependency>
 
 		<!-- https://mvnrepository.com/artifact/org.projectlombok/lombok -->
@@ -103,6 +106,21 @@
 			</exclusions>
 		</dependency>
 
+		<!-- https://mvnrepository.com/artifact/net.masterthought/cucumber-reporting -->
+		<!--<dependency>
+			<groupId>net.masterthought</groupId>
+			<artifactId>cucumber-reporting</artifactId>
+			<version>${report.version}</version>
+		</dependency>-->
+
+		<!-- https://mvnrepository.com/artifact/info.cukes/cucumber-picocontainer -->
+		<dependency>
+			<groupId>info.cukes</groupId>
+			<artifactId>cucumber-picocontainer</artifactId>
+			<version>${cucumber.version}</version>
+			<scope>test</scope>
+		</dependency>
+
 
 	</dependencies>
 
@@ -127,7 +145,7 @@
 				<version>2.18.1</version>
 				<configuration>
 					<includes>
-						<include>**/*/CucumberTestRunner.java</include>
+						<include>**/*/NopComTestRunner.java</include>
 					</includes>
 				</configuration>
 			</plugin>
@@ -136,7 +154,7 @@
 			<plugin>
 				<groupId>net.masterthought</groupId>
 				<artifactId>maven-cucumber-reporting</artifactId>
-				<version>3.10.0</version>
+				<version>${report.version}</version>
 				<executions>
 					<execution>
 						<id>execution</id>
@@ -145,11 +163,16 @@
 							<goal>generate</goal>
 						</goals>
 						<configuration>
-							<projectName>SELENIUM ONLINE - BANK GURU</projectName>
+							<projectName>BANK GURU CUCUMBER REPORT HTML</projectName>
 							<outputDirectory>${project.build.directory}/site/cucumber-reporting</outputDirectory>
-							<cucumberOutput>${project.build.directory}/site/cucumber.json</cucumberOutput>
-							<enableFlashCharts>true</enableFlashCharts>
-							<skippedFails>true</skippedFails>
+							<inputDirectory>${project.build.directory}/site</inputDirectory>
+							<jsonFiles>
+								<param>**/*.json</param>
+							</jsonFiles>
+							<!--<cucumberOutput>${project.build.directory}/site/cucumber.json</cucumberOutput>-->
+							<!--<enableFlashCharts>true</enableFlashCharts>-->
+							<!--<skippedFails>true</skippedFails>-->
+							<checkBuildResult>false</checkBuildResult>
 						</configuration>
 					</execution>
 				</executions>
